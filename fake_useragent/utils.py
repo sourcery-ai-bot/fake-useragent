@@ -56,11 +56,7 @@ def get(url, verify_ssl=True):
 
         try:
             if urlopen_has_ssl_context:
-                if not verify_ssl:
-                    context = ssl._create_unverified_context()
-                else:
-                    context = None
-
+                context = None if verify_ssl else ssl._create_unverified_context()
                 with contextlib.closing(urlopen(
                     request,
                     timeout=settings.HTTP_TIMEOUT,
@@ -82,12 +78,11 @@ def get(url, verify_ssl=True):
 
             if attempt == settings.HTTP_RETRIES:
                 raise FakeUserAgentError('Maximum amount of retries reached')
-            else:
-                logger.debug(
-                    'Sleeping for %s seconds',
-                    settings.HTTP_DELAY,
-                )
-                sleep(settings.HTTP_DELAY)
+            logger.debug(
+                'Sleeping for %s seconds',
+                settings.HTTP_DELAY,
+            )
+            sleep(settings.HTTP_DELAY)
 
 
 def get_browsers(verify_ssl=True):

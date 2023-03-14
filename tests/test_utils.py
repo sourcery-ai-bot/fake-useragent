@@ -89,11 +89,7 @@ def test_utils_get_browsers():
 
     assert set(expected) == set(browser_names)
 
-    total = 100
-
-    for _, percentage in browsers:
-        total -= float(percentage)
-
+    total = 100 - sum(float(percentage) for _, percentage in browsers)
     assert round(total, 0) <= 2
 
     if urlopen_has_ssl_context:

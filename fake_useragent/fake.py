@@ -137,13 +137,12 @@ class FakeUserAgent(object):
         except (KeyError, IndexError):
             if self.fallback is None:
                 raise FakeUserAgentError('Error occurred during getting browser')  # noqa
-            else:
-                logger.warning(
-                    'Error occurred during getting browser, '
-                    'but was suppressed with fallback.',
-                )
+            logger.warning(
+                'Error occurred during getting browser, '
+                'but was suppressed with fallback.',
+            )
 
-                return self.fallback
+            return self.fallback
 
 
 # common alias

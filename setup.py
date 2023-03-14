@@ -13,7 +13,7 @@ def get_version():
 
     path = ('fake_useragent', 'settings.py')
 
-    return re.search(regex, read(*path)).group('version')
+    return re.search(regex, read(*path))['version']
 
 
 def read(*parts):
@@ -31,7 +31,7 @@ setup(
     url='https://github.com/hellysmile/fake-useragent',
     description='Up to date simple useragent faker with real world database',
     long_description=read('README.rst'),
-    packages=[str('fake_useragent')],
+    packages=['fake_useragent'],
     include_package_data=True,
     zip_safe=False,
     classifiers=[
@@ -47,7 +47,12 @@ setup(
         'Operating System :: OS Independent',
     ],
     keywords=[
-        'user', 'agent', 'user agent', 'useragent',
-        'fake', 'fake useragent', 'fake user agent',
+        'user',
+        'agent',
+        'user agent',
+        'useragent',
+        'fake',
+        'fake useragent',
+        'fake user agent',
     ],
 )
